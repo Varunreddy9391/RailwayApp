@@ -76,4 +76,8 @@ public class ApplicationService {
         }
         return null; // Return null if the application does not exist
     }
+    public Optional<Application> findByUsername(String username) {
+        return applicationRepository.findByUsername(username);
+    }
+
 }

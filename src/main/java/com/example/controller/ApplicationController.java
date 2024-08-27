@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.model.Application;
 import com.example.service.ApplicationService;
 
-@SpringBootApplication
 @RestController
-@CrossOrigin(origins = "https://hostel-management-system1.netlify.app/")
-@ComponentScan(basePackages = {"com.bliss.www.controller", "com.bliss.www.service"})
 @RequestMapping("/api/applications")
-public class ApplicationController {
-
+public class ApplicationController  {
+   
 	@Autowired
     private ApplicationService applicationService;
 
@@ -52,7 +46,7 @@ public class ApplicationController {
         return ResponseEntity.ok(application);
     }
 
-    @DeleteMapping("/deleteapplication/{id}")
+    @DeleteMapping("/status/{id}")
     public ResponseEntity<Void> deleteApplication(@PathVariable Long id) {
         applicationService.deleteApplication(id);
         return ResponseEntity.noContent().build();
@@ -70,6 +64,12 @@ public class ApplicationController {
         } else {
             return ResponseEntity.notFound().build(); // Return not found if the application does not exist
         }
+    }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<Application> getByUsername(@PathVariable String username) {
+        return applicationService.findByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
      
 }
