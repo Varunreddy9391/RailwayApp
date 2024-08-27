@@ -2,9 +2,8 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class DemoAppApplication {
 
@@ -12,12 +11,12 @@ public class DemoAppApplication {
 		SpringApplication.run(DemoAppApplication.class, args);
 	}
 	
-	@RestController
-    public static class HelloController {
-        @GetMapping("/hello")
-        public String hello() {
-            return "Hello, Render!";
-        }
-    }
+//	@RestController
+//    public static class HelloController {
+//        @GetMapping("/hello")
+//        public String hello() {
+//            return "Hello, Render!";
+//        }
+//    }
 
 }
