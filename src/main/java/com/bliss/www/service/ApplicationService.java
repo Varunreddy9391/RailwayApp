@@ -1,4 +1,4 @@
-package com.example.service;
+package com.bliss.www.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,8 +9,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.model.Application;
-import com.example.repository.ApplicationRepository;
+import com.bliss.www.model.Application;
+import com.bliss.www.repository.ApplicationRepository;
 
 @Service
 public class ApplicationService {
@@ -76,8 +76,4 @@ public class ApplicationService {
         }
         return null; // Return null if the application does not exist
     }
-    public Optional<Application> findByUsername(String username) {
-        return applicationRepository.findByUsername(username);
-    }
-
 }
