@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table
+@Table(name="api/image")
 public class Image {
 
 	@Id

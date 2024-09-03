@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="user3")
+@Table(name="api/loginsignup/table")
 @Data
 public class User {
 
