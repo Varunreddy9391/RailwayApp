@@ -53,8 +53,20 @@ public class ApplicationService {
         return applicationRepository.findById(id);
     }
 
-    public void deleteApplication(Long id) {
-        applicationRepository.deleteById(id);
+    public boolean vacateApplicationById(Long id) {
+        Optional<Application> applicationOptional = applicationRepository.findById(id);
+        if (applicationOptional.isPresent()) {
+            Application application = applicationOptional.get();
+            
+            // Only update if vacatedFromHostel is currently "false"
+            if ("false".equals(application.getVacatedFromHostel())) {
+                application.setVacatedFromHostel("true"); // Set to "true"
+                applicationRepository.save(application); // Save the updated entity
+                return true;
+            }
+            return false; // No update needed
+        }
+        return false; // Entity not found
     }
     public Application updateApplication(Long id, Application application) {
         if (applicationRepository.existsById(id)) {

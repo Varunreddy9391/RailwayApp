@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bliss.www.model.Application;
 import com.bliss.www.service.ApplicationService;
 
-@SpringBootApplication
 @RestController
-@CrossOrigin(origins = "https://hostel-management-system1.netlify.app/")
-@ComponentScan(basePackages = {"com.bliss.www.controller", "com.bliss.www.service"})
 @RequestMapping("/api/applications")
-public class ApplicationController {
-
+public class ApplicationController  {
+   
 	@Autowired
     private ApplicationService applicationService;
 
@@ -52,10 +46,14 @@ public class ApplicationController {
         return ResponseEntity.ok(application);
     }
 
-    @DeleteMapping("/deleteapplication/{id}")
-    public ResponseEntity<Void> deleteApplication(@PathVariable Long id) {
-        applicationService.deleteApplication(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/vacate/{id}")
+    public ResponseEntity<Void> vacateApplication(@PathVariable Long id) {
+        boolean isUpdated = applicationService.vacateApplicationById(id);
+        if (isUpdated) {
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<Application> updateApplication(@PathVariable Long id, @RequestBody Application application) {
