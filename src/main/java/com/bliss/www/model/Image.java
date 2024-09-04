@@ -13,9 +13,9 @@ import lombok.Data;
 @Table(name="api/image")
 public class Image {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq")
-    @SequenceGenerator(name = "app_seq", sequenceName = "app_sequence", allocationSize = 1)
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq")
+	    @SequenceGenerator(name = "app_seq", sequenceName = "app_sequence", allocationSize = 1, initialValue = 1)
     private Long id;
     
     private String name;
