@@ -1,3 +1,4 @@
+
 package com.bliss.www.model;
 
 import jakarta.persistence.Column;
@@ -13,10 +14,9 @@ import lombok.Data;
 @Data
 @Table(name="api/application/table")
 public class Application {
-
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq")
-	    @SequenceGenerator(name = "app_seq", sequenceName = "app_sequence", allocationSize = 1, initialValue = 1)
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "application_seq")
+    @SequenceGenerator(name = "application_seq", sequenceName = "application_sequence", allocationSize = 1, initialValue = 1)
 	    private Long id;
 
 	    private String dateOfJoining;
