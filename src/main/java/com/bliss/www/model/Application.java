@@ -36,9 +36,10 @@ public class Application {
 	    private String paymentCompleted;
 	    private String feeAmount;
 	    @Column(name = "vacatedFromHostel")
-	    private String vacatedFromHostel;
+	    private String vacatedFromHostel = "false";
 	    private String role;
 	    private String username;
+	    private String password;
 		 
 		 
 	    public String getVacatedFromHostel() {

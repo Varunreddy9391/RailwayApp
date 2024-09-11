@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bliss.www.model.Application;
@@ -73,6 +74,23 @@ public class ApplicationController  {
         } else {
             return ResponseEntity.notFound().build(); // Return not found if the application does not exist
         }
+    }
+    @GetMapping("/getApplication")
+    public ResponseEntity<Application> getApplication(
+            @RequestParam String username,
+            @RequestParam String password) {
+        
+        Application application = applicationService.getApplicationByUsernameAndPassword(username, password);
+        if (application != null) {
+            return ResponseEntity.ok(application);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @GetMapping("/vacated")
+    public List<Application> getVacatedApplications() {
+        return applicationService.getVacatedApplications();
     }
      
 }
