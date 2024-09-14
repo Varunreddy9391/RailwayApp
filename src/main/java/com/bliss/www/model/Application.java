@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="api/application/table")
+@Table(name="application_table_1")
 public class Application {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "application_seq")
@@ -40,7 +40,7 @@ public class Application {
 	    private String role;
 	    private String username;
 	    private String password;
-		 
+	   
 		 
 	    public String getVacatedFromHostel() {
 	        return vacatedFromHostel;

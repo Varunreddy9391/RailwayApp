@@ -89,10 +89,16 @@ public class ApplicationService {
         }
         return null; // Return null if the application does not exist
     }
-    public Application getApplicationByUsernameAndPassword(String username, String password) {
-        return applicationRepository.findByUsernameAndPassword(username, password);
-    }
+     
     public List<Application> getVacatedApplications() {
         return applicationRepository.findByVacatedFromHostel("true");
     }
-}
+    public Application loginByUsernameAndPassword(String username, String password) {
+        Application user = applicationRepository.findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            return user; // Passwords match
+        }
+        return null; // User not found or password mismatch
+    }
+
+     }

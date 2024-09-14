@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.bliss.www.model.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long>{
-	Application findByUsernameAndPassword(String username, String password);
     List<Application> findByVacatedFromHostel(String vacatedFromHostel);
+    Application findByUsernameAndPassword(String username, String password);
+	Application findByUsername(String username);
 
 }

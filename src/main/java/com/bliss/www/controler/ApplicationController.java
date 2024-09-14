@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bliss.www.model.Application;
@@ -75,22 +75,22 @@ public class ApplicationController  {
             return ResponseEntity.notFound().build(); // Return not found if the application does not exist
         }
     }
-    @GetMapping("/getApplication")
-    public ResponseEntity<Application> getApplication(
-            @RequestParam String username,
-            @RequestParam String password) {
-        
-        Application application = applicationService.getApplicationByUsernameAndPassword(username, password);
-        if (application != null) {
-            return ResponseEntity.ok(application);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-    
+     
     @GetMapping("/vacated")
     public List<Application> getVacatedApplications() {
         return applicationService.getVacatedApplications();
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<Application> login(@RequestBody Application application) {
+        Application loggedInUser = applicationService.loginByUsernameAndPassword(application.getUsername(), application.getPassword());
+
+        if (loggedInUser != null) {
+            return ResponseEntity.ok(loggedInUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Unauthorized
+        }
+    }
+
      
 }
