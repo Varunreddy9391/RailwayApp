@@ -10,27 +10,32 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="image_table1")
+@Table(name = "api/image")
 public class Image {
 
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq")
-	    @SequenceGenerator(name = "app_seq", sequenceName = "app_sequence", allocationSize = 1, initialValue = 1)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq")
+    @SequenceGenerator(name = "app_seq", sequenceName = "app_sequence", allocationSize = 1, initialValue = 1)
     private Long id;
-    
+
     private String name;
     private String contentType;
-    
+
     // Image 1 fields
     private byte[] data1;
     private String name1;
     private String contentType1;
-    
+
     // Image 2 fields
     private byte[] data2;
     private String name2;
     private String contentType2;
-    
+
+    // Image 3 fields
+    private byte[] data3;
+    private String name3;
+    private String contentType3;
+
     private String role;
 
     // Getters and Setters

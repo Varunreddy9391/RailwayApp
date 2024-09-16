@@ -100,5 +100,14 @@ public class ApplicationService {
         }
         return null; // User not found or password mismatch
     }
+    public boolean Application(String username, String email, String Password) {
+        Application user = applicationRepository.findByUsernameAndEmail(username, email);
+        if (user != null) {
+            user.setPassword(Password); // Set the plain text password
+            applicationRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 
      }

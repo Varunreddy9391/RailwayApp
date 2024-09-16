@@ -91,6 +91,15 @@ public class ApplicationController  {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Unauthorized
         }
     }
+    @PostMapping("/reset-password")
+    public String Application(@RequestBody Application request) {
+        boolean isReset = applicationService.Application(request.getUsername(), request.getEmail(), request.getPassword());
+        if (isReset) {
+            return "Password reset successfully.";
+        } else {
+            return "Invalid username or email.";
+        }
+    }
 
      
 }

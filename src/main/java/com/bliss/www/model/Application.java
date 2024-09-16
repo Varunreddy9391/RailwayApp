@@ -39,6 +39,7 @@ public class Application {
 	    private String vacatedFromHostel = "false";
 	    private String role;
 	    private String username;
+	    private String email;
 	    private String password;
 	   
 		 

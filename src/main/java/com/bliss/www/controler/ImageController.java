@@ -30,24 +30,25 @@ import com.bliss.www.service.ImageService;
 @RequestMapping("/images")
 public class ImageController {
 
-	@Autowired
+    @Autowired
     private ImageService imageService;
 
-    // Upload two images for the same entity
+    // Upload three images for the same entity
     @PostMapping("/upload")
     public ResponseEntity<String> uploadImages(
             @RequestParam(value = "id", required = false) Long id,
             @RequestParam("file1") MultipartFile file1,
-            @RequestParam("file2") MultipartFile file2) {
+            @RequestParam("file2") MultipartFile file2,
+            @RequestParam("file3") MultipartFile file3) {
         try {
-            Image savedImage = imageService.saveImages(id, file1, file2);
+            Image savedImage = imageService.saveImages(id, file1, file2, file3);
             return ResponseEntity.ok("Images uploaded successfully. Image ID: " + savedImage.getId());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Image upload failed: " + e.getMessage());
         }
     }
-     
+
     // Retrieve image based on its ID and specify which image to retrieve
     @GetMapping("/{id}/{imageType}")
     public ResponseEntity<Resource> getImage(
@@ -69,6 +70,10 @@ public class ImageController {
                 imageData = image.getData2();
                 imageName = image.getName2();
                 contentType = image.getContentType2();
+            } else if ("file3".equals(imageType)) {
+                imageData = image.getData3();
+                imageName = image.getName3();
+                contentType = image.getContentType3();
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(null);
