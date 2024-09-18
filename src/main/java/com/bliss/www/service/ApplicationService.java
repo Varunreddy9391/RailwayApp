@@ -109,5 +109,9 @@ public class ApplicationService {
         }
         return false;
     }
+    public boolean doesUsernameExist(String username) {
+        return applicationRepository.existsByUsername(username);
+    }
+
 
      }

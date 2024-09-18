@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bliss.www.dto.UsernameCheckResponse;
 import com.bliss.www.model.Application;
 import com.bliss.www.service.ApplicationService;
 
@@ -99,6 +101,11 @@ public class ApplicationController  {
         } else {
             return "Invalid username or email.";
         }
+    }
+    @GetMapping("/checkusername")
+    public UsernameCheckResponse checkUsername(@RequestParam String username) {
+        boolean exists = applicationService.doesUsernameExist(username);
+        return new UsernameCheckResponse(exists);
     }
 
      

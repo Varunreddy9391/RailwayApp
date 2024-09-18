@@ -12,5 +12,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Long>{
     Application findByUsernameAndPassword(String username, String password);
 	Application findByUsername(String username);
 	 Application findByUsernameAndEmail(String username, String email);
+	 boolean existsByUsername(String username);
 
 }
